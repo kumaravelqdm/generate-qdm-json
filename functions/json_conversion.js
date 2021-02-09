@@ -4,7 +4,8 @@ const convertJson = (json) => {
     let EntityName = json.entity_name;
     let dataTypes = json.dataTypes;
     let table_id = uuid()
-    let Entity = createEntity({ table_id, title: EntityName, type: json.type })
+    const { entity_type } = json
+    let Entity = createEntity({ table_id, title: EntityName, entity_type })
     Entity.fields = createDatatypes(dataTypes, table_id, EntityName)
     return Entity
 }
@@ -55,8 +56,8 @@ const createEntity = (props) => {
             description: '',
             id: props.table_id,
             type: {
-                label: props.type,
-                value: props.type
+                label: props.entity_type,
+                value: props.entity_type
             },
             left: 10,
             top: 10,
